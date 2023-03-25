@@ -5,6 +5,6 @@
 March 25, 2023
 
     - Created the setup of my Operating System
-
+    - Implemented the bootloader [just prints my name on the screen]
 
 =============================================================
