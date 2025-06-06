@@ -21,4 +21,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "Maron OS"
 include(":app")
- 
+include(":core")

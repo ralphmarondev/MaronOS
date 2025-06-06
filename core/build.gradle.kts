@@ -1,22 +1,19 @@
 plugins {
-    alias(libs.plugins.android.application)
+    alias(libs.plugins.android.library)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.kotlin.serialization)
 }
 
 android {
-    namespace = "com.ralphmarondev.maron_os"
+    namespace = "com.ralphmarondev.core"
     compileSdk = 35
 
     defaultConfig {
-        applicationId = "com.ralphmarondev.maron_os"
         minSdk = 28
-        targetSdk = 35
-        versionCode = 1
-        versionName = "25.06"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -42,8 +39,6 @@ android {
 
 dependencies {
 
-    implementation(project(":core"))
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
     implementation(libs.androidx.activity.compose)
@@ -54,17 +49,11 @@ dependencies {
     implementation(libs.androidx.material3)
 
     implementation(libs.androidx.material.icons.extended.android)
-    implementation(libs.androidx.core.splashscreen)
     implementation(libs.coil.compose)
-    implementation(libs.navigation.compose)
     implementation(libs.kotlinx.serialization.json)
     implementation(libs.bundles.koin)
 
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
-    androidTestImplementation(platform(libs.androidx.compose.bom))
-    androidTestImplementation(libs.androidx.ui.test.junit4)
-    debugImplementation(libs.androidx.ui.tooling)
-    debugImplementation(libs.androidx.ui.test.manifest)
 }
