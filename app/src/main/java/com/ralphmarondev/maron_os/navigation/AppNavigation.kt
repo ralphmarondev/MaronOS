@@ -17,6 +17,7 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ralphmarondev.setup.navigation.SetupNavigation
 
 @Composable
 fun AppNavigation(
@@ -27,32 +28,14 @@ fun AppNavigation(
         startDestination = Routes.Setup
     ) {
         composable<Routes.Setup> {
-            Column(
-                modifier = Modifier
-                    .fillMaxSize()
-                    .padding(16.dp),
-                horizontalAlignment = Alignment.CenterHorizontally,
-                verticalArrangement = Arrangement.Center
-            ) {
-                Text(
-                    text = "Setup",
-                    fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                    fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
-                    color = MaterialTheme.colorScheme.secondary,
-                    textAlign = TextAlign.Center
-                )
-                Button(
-                    onClick = {
-                        navController.navigate(Routes.Auth) {
-                            launchSingleTop = true
-                        }
+            SetupNavigation(
+                install = {
+                    navController.navigate(Routes.Auth) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
                     }
-                ) {
-                    Text(
-                        text = "Navigate to Auth"
-                    )
                 }
-            }
+            )
         }
         composable<Routes.Auth> {
             Column(
