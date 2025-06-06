@@ -6,6 +6,8 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.ralphmarondev.core.theme.ThemeProvider
 import com.ralphmarondev.core.theme.ThemeState
+import com.ralphmarondev.maron_os.navigation.AppNavigation
+import com.ralphmarondev.maron_os.ui.theme.MaronOSTheme
 import org.koin.android.ext.android.inject
 
 class MainActivity : ComponentActivity() {
@@ -17,7 +19,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             ThemeProvider(themeState = themeState) {
-
+                MaronOSTheme(darkTheme = themeState.darkTheme.value) {
+                    AppNavigation()
+                }
             }
         }
     }
