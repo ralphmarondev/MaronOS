@@ -15,18 +15,21 @@ import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.EnhancedEncryption
 import androidx.compose.material.icons.outlined.WarningAmber
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedCard
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -35,6 +38,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.ralphmarondev.presentation.components.PasswordTextField
 import com.ralphmarondev.setup.R
 import com.ralphmarondev.setup.SetupViewModel
 
@@ -48,15 +52,23 @@ fun EncryptionScreen(
     val confirmPassPhrase = viewModel.confirmPassPhrase.collectAsState().value
     val response = viewModel.encryptionResponse.collectAsState().value
 
-    LaunchedEffect(Unit) {
+    val snackbarState = remember { SnackbarHostState() }
+
+    LaunchedEffect(response) {
         response?.let {
             if (it.success == true) {
                 navigateToLoginDetails()
             }
+            snackbarState.showSnackbar(
+                message = it.message
+            )
+            viewModel.resetEncryptionResponse()
         }
     }
 
-    Scaffold { innerPadding ->
+    Scaffold(
+        snackbarHost = { SnackbarHost(snackbarState) }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -92,26 +104,20 @@ fun EncryptionScreen(
             )
 
             Spacer(modifier = Modifier.height(12.dp))
-            OutlinedTextField(
+            PasswordTextField(
                 value = passPhrase,
                 onValueChange = viewModel::onPassPhraseValueChange,
-                label = {
-                    Text(
-                        text = "Choose a passphrase"
-                    )
-                },
+                leadingIcon = Icons.Outlined.EnhancedEncryption,
+                label = "Choose a passphrase",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             )
-            OutlinedTextField(
+            PasswordTextField(
                 value = confirmPassPhrase,
                 onValueChange = viewModel::onConfirmPassPhraseValueChange,
-                label = {
-                    Text(
-                        text = "Confirm the passphrase"
-                    )
-                },
+                leadingIcon = Icons.Outlined.EnhancedEncryption,
+                label = "Confirm the passphrase",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)

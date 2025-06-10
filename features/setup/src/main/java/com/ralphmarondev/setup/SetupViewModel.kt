@@ -1,9 +1,12 @@
 package com.ralphmarondev.setup
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.domain.model.Result
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
 class SetupViewModel : ViewModel() {
 
@@ -88,6 +91,13 @@ class SetupViewModel : ViewModel() {
             success = true,
             message = "Passphrase is valid."
         )
+    }
+
+    fun resetEncryptionResponse() {
+        viewModelScope.launch {
+            delay(3000)
+            _encryptionResponse.value = null
+        }
     }
 
     fun onboardingCompleted() {
