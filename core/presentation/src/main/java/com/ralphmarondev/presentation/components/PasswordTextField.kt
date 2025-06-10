@@ -20,6 +20,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
+import androidx.compose.ui.text.style.TextOverflow
 
 @Composable
 fun PasswordTextField(
@@ -43,12 +44,16 @@ fun PasswordTextField(
         modifier = modifier,
         placeholder = {
             Text(
-                text = placeHolder
+                text = placeHolder,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         },
         label = {
             Text(
-                text = label
+                text = label,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
         },
         textStyle = TextStyle(
