@@ -1,0 +1,33 @@
+<resources>
+    <!--app choices-->
+    <string name="app_choice_title">
+        What apps would you like to install to start with?
+    </string>
+    <string name="default_selection">Default Selection</string>
+    <string name="default_selection_desc">
+        Just the essentials, with browser and base utilities.
+    </string>
+    <string name="extended_selection">Extended Selection</string>
+    <string name="extended_selection_desc">
+        All apps available on Maron OS store.
+    </string>
+
+    <!--encryption-->
+    <string name="passphrase_title">Create a passphrase</string>
+    <string name="passphrase_desc">
+        You need a passphrase to encrypt your files. You will be prompted for your passphrase
+        every time you turn on your computer.
+    </string>
+    <string name="passphrase_notice">
+        Make sure you save your passphrase. If you have lose your passphrase, you will lose
+        all of your data.
+    </string>
+
+    <!--installing-->
+    <string name="installing_title">Fast, free and full of new features.</string>
+    <string name="installing_desc1">The latest version makes computing easier than ever.</string>
+    <string name="installing_desc2">
+        Whether you\'re a developer, creator, gamer or administrator, you\'ll find new tools
+        to improve your productivity and enhance your experience in this release.
+    </string>
+</resources>
