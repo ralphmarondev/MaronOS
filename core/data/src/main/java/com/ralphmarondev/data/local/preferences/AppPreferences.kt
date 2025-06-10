@@ -16,6 +16,7 @@ class AppPreferences(
 ) {
     companion object {
         val KEY_DARK_MODE = booleanPreferencesKey("dark_mode")
+        val KEY_FIRST_LAUNCH = booleanPreferencesKey("first_launch")
         val KEY_USERNAME = stringPreferencesKey("username")
     }
 
@@ -27,6 +28,15 @@ class AppPreferences(
 
     val darkModeEnabled: Flow<Boolean> = context.appDataStore.data
         .map { prefs -> prefs[KEY_DARK_MODE] == true }
+
+    suspend fun setIsFirstLaunch(value: Boolean) {
+        context.appDataStore.edit { prefs ->
+            prefs[KEY_FIRST_LAUNCH] = value
+        }
+    }
+
+    val isFirstLaunch: Flow<Boolean> = context.appDataStore.data
+        .map { prefs -> prefs[KEY_FIRST_LAUNCH] != false }
 
     suspend fun setUsername(username: String) {
         context.appDataStore.edit { prefs ->
