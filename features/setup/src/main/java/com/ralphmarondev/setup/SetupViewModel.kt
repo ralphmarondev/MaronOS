@@ -37,6 +37,9 @@ class SetupViewModel : ViewModel() {
     private val _encryptionResponse = MutableStateFlow<Result?>(null)
     val encryptionResponse = _encryptionResponse.asStateFlow()
 
+    private val _accountResponse = MutableStateFlow<Result?>(null)
+    val accountResponse = _accountResponse.asStateFlow()
+
 
     fun onPassPhraseValueChange(value: String) {
         _passPhrase.value = value
@@ -97,6 +100,69 @@ class SetupViewModel : ViewModel() {
         viewModelScope.launch {
             delay(3000)
             _encryptionResponse.value = null
+        }
+    }
+
+    fun checkAccountDetails() {
+        val fullName = _fullName.value.trim()
+        val computerName = _computerName.value.trim()
+        val username = _username.value.trim()
+        val password = _password.value.trim()
+        val confirmPassword = _confirmPassword.value.trim()
+
+        if (fullName.isBlank() && computerName.isBlank() && username.isBlank() && password.isBlank() && confirmPassword.isBlank()) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Please fill in all fields"
+            )
+            return
+        }
+        if (fullName.isBlank()) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Full name cannot be empty."
+            )
+            return
+        }
+        if (computerName.isBlank()) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Computer name cannot be empty."
+            )
+            return
+        }
+        if (username.isBlank()) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Username cannot be empty."
+            )
+            return
+        }
+        if (password.isBlank()) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Password cannot be empty."
+            )
+            return
+        }
+        if (password != confirmPassword) {
+            _accountResponse.value = Result(
+                success = false,
+                message = "Password did not matched."
+            )
+            return
+        }
+
+        _accountResponse.value = Result(
+            success = true,
+            message = "Account details are valid."
+        )
+    }
+
+    fun resetAccountResponse() {
+        viewModelScope.launch {
+            delay(3000)
+            _accountResponse.value = null
         }
     }
 

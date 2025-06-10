@@ -93,7 +93,8 @@ fun SetupNavigation(
                     navController.navigate(Routes.Summary) {
                         launchSingleTop = true
                     }
-                }
+                },
+                viewModel = viewModel
             )
         }
         composable<Routes.Summary> {

@@ -14,14 +14,23 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.verticalScroll
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.AccountBox
+import androidx.compose.material.icons.outlined.AccountTree
+import androidx.compose.material.icons.outlined.Computer
+import androidx.compose.material.icons.outlined.Password
 import androidx.compose.material3.Button
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedButton
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -29,14 +38,44 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
+import com.ralphmarondev.presentation.components.NormalTextField
+import com.ralphmarondev.presentation.components.PasswordTextField
 import com.ralphmarondev.setup.R
+import com.ralphmarondev.setup.SetupViewModel
 
 @Composable
 fun LoginDetailsScreen(
     navigateBack: () -> Unit,
-    navigateToSummary: () -> Unit
+    navigateToSummary: () -> Unit,
+    viewModel: SetupViewModel
 ) {
-    Scaffold { innerPadding ->
+    val fullName = viewModel.fullName.collectAsState().value
+    val computerName = viewModel.computerName.collectAsState().value
+    val username = viewModel.username.collectAsState().value
+    val password = viewModel.password.collectAsState().value
+    val confirmPassword = viewModel.confirmPassword.collectAsState().value
+    val requirePasswordOnLogin = viewModel.requirePasswordOnLogin.collectAsState().value
+    val response = viewModel.accountResponse.collectAsState().value
+
+    val snackbarState = remember { SnackbarHostState() }
+
+    LaunchedEffect(response) {
+        response?.let {
+            if (it.success == true) {
+                navigateToSummary()
+            }
+            snackbarState.showSnackbar(
+                message = it.message
+            )
+            viewModel.resetAccountResponse()
+        }
+    }
+
+    Scaffold(
+        snackbarHost = {
+            SnackbarHost(snackbarState)
+        }
+    ) { innerPadding ->
         Column(
             modifier = Modifier
                 .fillMaxSize()
@@ -64,63 +103,48 @@ fun LoginDetailsScreen(
                 textAlign = TextAlign.Start,
                 modifier = Modifier.fillMaxWidth()
             )
-            Spacer(modifier = Modifier.height(12.dp))
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = {
-                    Text(
-                        text = "Your name"
-                    )
-                },
+            Spacer(modifier = Modifier.height(8.dp))
+            NormalTextField(
+                value = fullName,
+                onValueChange = viewModel::onFullNameValueChange,
+                leadingIcon = Icons.Outlined.AccountBox,
+                label = "Your name",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             )
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = {
-                    Text(
-                        text = "Your computer's name"
-                    )
-                },
+            NormalTextField(
+                value = computerName,
+                onValueChange = viewModel::onComputerValueChange,
+                leadingIcon = Icons.Outlined.Computer,
+                label = "Your computer's name",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             )
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = {
-                    Text(
-                        text = "Your username"
-                    )
-                },
+            NormalTextField(
+                value = username,
+                onValueChange = viewModel::onUsernameValueChange,
+                leadingIcon = Icons.Outlined.AccountTree,
+                label = "Your username",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             )
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = {
-                    Text(
-                        text = "Password"
-                    )
-                },
+            PasswordTextField(
+                value = password,
+                onValueChange = viewModel::onPasswordValueChange,
+                leadingIcon = Icons.Outlined.Password,
+                label = "Password",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
             )
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                label = {
-                    Text(
-                        text = "Confirm password"
-                    )
-                },
+            PasswordTextField(
+                value = confirmPassword,
+                onValueChange = viewModel::onConfirmPasswordValueChange,
+                leadingIcon = Icons.Outlined.Password,
+                label = "Confirm password",
                 modifier = Modifier
                     .fillMaxWidth()
                     .padding(vertical = 4.dp)
@@ -131,8 +155,8 @@ fun LoginDetailsScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Checkbox(
-                    checked = true,
-                    onCheckedChange = {}
+                    checked = requirePasswordOnLogin,
+                    onCheckedChange = { viewModel.setRequirePasswordOnLogin(it) }
                 )
                 Spacer(modifier = Modifier.width(4.dp))
                 Text(
@@ -161,7 +185,7 @@ fun LoginDetailsScreen(
                     )
                 }
                 Button(
-                    onClick = navigateToSummary,
+                    onClick = viewModel::checkAccountDetails,
                     modifier = Modifier
                         .weight(1f)
                         .padding(2.dp),
