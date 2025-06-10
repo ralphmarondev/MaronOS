@@ -105,9 +105,6 @@ fun SetupNavigation() {
         }
         composable<Routes.Installing> {
             InstallingScreen(
-                navigateBack = {
-                    navController.navigateUp()
-                },
                 navigateToCompleted = {
                     navController.navigate(Routes.Completed) {
                         launchSingleTop = true

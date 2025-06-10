@@ -18,8 +18,9 @@
         You need a passphrase to encrypt your files. You will be prompted for your passphrase
         every time you turn on your computer.
     </string>
-    <string name="passphrase_notice">
-        Make sure you save your passphrase. If you have lose your passphrase, you will lose
+    <string name="passphrase_notice_title">Make sure you save your passphrase.</string>
+    <string name="passphrase_notice_desc">
+        If you have lose your passphrase, you will lose
         all of your data.
     </string>
 
