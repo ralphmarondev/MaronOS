@@ -12,6 +12,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
@@ -19,11 +20,21 @@ import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.maron_os.R
 import com.ralphmarondev.maron_os.launcher.presentation.components.DateTimeWidget
+import com.ralphmarondev.presentation.theme.LocalThemeState
+import kotlinx.coroutines.delay
 import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun LauncherScreen() {
+    val themeState = LocalThemeState.current
     val viewModel: LauncherViewModel = koinViewModel()
+
+    LaunchedEffect(Unit) {
+        while (true) {
+            themeState.toggleTheme()
+            delay(5000)
+        }
+    }
 
     Scaffold { innerPadding ->
         Box(
