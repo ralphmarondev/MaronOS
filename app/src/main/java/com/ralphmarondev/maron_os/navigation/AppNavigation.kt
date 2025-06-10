@@ -21,6 +21,7 @@ fun AppNavigation(
             SplashScreen(
                 onSplashDone = {
                     navController.navigate(Routes.Setup) {
+                        popUpTo(0) { inclusive = true }
                         launchSingleTop = true
                     }
                 }
