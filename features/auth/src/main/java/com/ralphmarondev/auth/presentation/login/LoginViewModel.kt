@@ -1,11 +1,17 @@
 package com.ralphmarondev.auth.presentation.login
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.ralphmarondev.auth.domain.usecase.LoginUseCase
 import com.ralphmarondev.domain.model.Result
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
 
-class LoginViewModel : ViewModel() {
+class LoginViewModel(
+    private val loginUseCase: LoginUseCase
+) : ViewModel() {
 
     private val _username = MutableStateFlow("")
     val username = _username.asStateFlow()
@@ -26,6 +32,19 @@ class LoginViewModel : ViewModel() {
     }
 
     fun login() {
+        viewModelScope.launch {
+            val response = loginUseCase(
+                username = _username.value.trim(),
+                password = _password.value.trim()
+            )
+            _response.value = response
+        }
+    }
 
+    fun resetResponse() {
+        viewModelScope.launch {
+            delay(3000)
+            _response.value = null
+        }
     }
 }
