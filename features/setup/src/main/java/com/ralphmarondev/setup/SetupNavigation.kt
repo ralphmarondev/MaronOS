@@ -106,7 +106,8 @@ fun SetupNavigation(
                     navController.navigate(Routes.Installing) {
                         launchSingleTop = true
                     }
-                }
+                },
+                viewModel = viewModel
             )
         }
         composable<Routes.Installing> {
