@@ -25,6 +25,8 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -34,12 +36,26 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import coil.compose.rememberAsyncImagePainter
 import com.ralphmarondev.setup.R
+import com.ralphmarondev.setup.SetupViewModel
 
 @Composable
 fun EncryptionScreen(
     navigateBack: () -> Unit,
-    navigateToLoginDetails: () -> Unit
+    navigateToLoginDetails: () -> Unit,
+    viewModel: SetupViewModel
 ) {
+    val passPhrase = viewModel.passPhrase.collectAsState().value
+    val confirmPassPhrase = viewModel.confirmPassPhrase.collectAsState().value
+    val response = viewModel.encryptionResponse.collectAsState().value
+
+    LaunchedEffect(Unit) {
+        response?.let {
+            if (it.success == true) {
+                navigateToLoginDetails()
+            }
+        }
+    }
+
     Scaffold { innerPadding ->
         Column(
             modifier = Modifier
@@ -77,8 +93,8 @@ fun EncryptionScreen(
 
             Spacer(modifier = Modifier.height(12.dp))
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = passPhrase,
+                onValueChange = viewModel::onPassPhraseValueChange,
                 label = {
                     Text(
                         text = "Choose a passphrase"
@@ -89,8 +105,8 @@ fun EncryptionScreen(
                     .padding(vertical = 4.dp)
             )
             OutlinedTextField(
-                value = "",
-                onValueChange = {},
+                value = confirmPassPhrase,
+                onValueChange = viewModel::onConfirmPassPhraseValueChange,
                 label = {
                     Text(
                         text = "Confirm the passphrase"
@@ -153,7 +169,7 @@ fun EncryptionScreen(
                     )
                 }
                 Button(
-                    onClick = navigateToLoginDetails,
+                    onClick = viewModel::checkPassPhrase,
                     modifier = Modifier
                         .weight(1f)
                         .padding(2.dp),

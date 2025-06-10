@@ -13,12 +13,14 @@ import com.ralphmarondev.setup.presentation.LoginDetailsScreen
 import com.ralphmarondev.setup.presentation.SummaryScreen
 import com.ralphmarondev.setup.presentation.ThemeChoicesScreen
 import com.ralphmarondev.setup.presentation.WelcomeScreen
+import org.koin.androidx.compose.koinViewModel
 
 @Composable
 fun SetupNavigation(
     onSetupCompleted: () -> Unit
 ) {
     val navController = rememberNavController()
+    val viewModel: SetupViewModel = koinViewModel()
 
     NavHost(
         navController = navController,
@@ -78,7 +80,8 @@ fun SetupNavigation(
                     navController.navigate(Routes.LoginDetails) {
                         launchSingleTop = true
                     }
-                }
+                },
+                viewModel = viewModel
             )
         }
         composable<Routes.LoginDetails> {
