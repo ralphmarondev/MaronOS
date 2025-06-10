@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import com.ralphmarondev.data.local.preferences.AppPreferences
-import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
+import com.ralphmarondev.maron_os.navigation.AppNavigation
 import com.ralphmarondev.maron_os.ui.theme.MaronOSTheme
 import com.ralphmarondev.presentation.theme.LocalThemeState
 import com.ralphmarondev.presentation.theme.ThemeProvider
@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
             ThemeProvider(preferences = preferences) {
                 val themeState = LocalThemeState.current
                 MaronOSTheme(darkTheme = themeState.darkTheme.value) {
-                    LauncherScreen()
+                    AppNavigation()
                 }
             }
         }
