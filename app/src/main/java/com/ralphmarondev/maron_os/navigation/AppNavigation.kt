@@ -29,7 +29,14 @@ fun AppNavigation(
             )
         }
         composable<Routes.Setup> {
-            SetupNavigation()
+            SetupNavigation(
+                onSetupCompleted = {
+                    navController.navigate(Routes.Auth) {
+                        popUpTo(0) { inclusive = true }
+                        launchSingleTop = true
+                    }
+                }
+            )
         }
         composable<Routes.Auth> {
             AuthNavigation(

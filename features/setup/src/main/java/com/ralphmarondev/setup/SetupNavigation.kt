@@ -15,7 +15,9 @@ import com.ralphmarondev.setup.presentation.ThemeChoicesScreen
 import com.ralphmarondev.setup.presentation.WelcomeScreen
 
 @Composable
-fun SetupNavigation() {
+fun SetupNavigation(
+    onSetupCompleted: () -> Unit
+) {
     val navController = rememberNavController()
 
     NavHost(
@@ -114,7 +116,7 @@ fun SetupNavigation() {
         }
         composable<Routes.Completed> {
             CompletedScreen(
-                completed = {}
+                completed = onSetupCompleted
             )
         }
     }
