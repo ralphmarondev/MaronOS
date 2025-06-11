@@ -26,6 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.NavHostController
 import com.ralphmarondev.maron_os.R
 import com.ralphmarondev.maron_os.launcher.domain.model.AppData
+import com.ralphmarondev.maron_os.navigation.Routes
 
 @Composable
 fun BottomNavigationBar(
@@ -52,7 +53,11 @@ fun BottomNavigationBar(
         AppData(
             iconRes = R.drawable.setting,
             name = "Settings",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Settings) {
+                    launchSingleTop = true
+                }
+            }
         )
     )
 

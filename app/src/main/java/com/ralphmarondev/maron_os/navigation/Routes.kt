@@ -16,4 +16,7 @@ object Routes {
 
     @Serializable
     data object Launcher
+
+    @Serializable
+    data object Settings
 }

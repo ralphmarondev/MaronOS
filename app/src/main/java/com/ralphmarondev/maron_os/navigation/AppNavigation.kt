@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.AuthNavigation
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
 import com.ralphmarondev.maron_os.splash.presentation.SplashScreen
+import com.ralphmarondev.settings.SettingsNavigation
 import com.ralphmarondev.setup.SetupNavigation
 
 @Composable
@@ -50,6 +51,9 @@ fun AppNavigation(
         }
         composable<Routes.Launcher> {
             LauncherScreen(navController = navController)
+        }
+        composable<Routes.Settings> {
+            SettingsNavigation()
         }
     }
 }
