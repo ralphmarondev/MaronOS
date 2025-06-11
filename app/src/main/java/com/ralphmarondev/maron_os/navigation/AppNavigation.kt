@@ -21,7 +21,7 @@ fun AppNavigation(
         composable<Routes.Splash> {
             SplashScreen(
                 onSplashDone = {
-                    navController.navigate(Routes.Setup) {
+                    navController.navigate(Routes.Launcher) {
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
                     }
@@ -49,7 +49,7 @@ fun AppNavigation(
             )
         }
         composable<Routes.Launcher> {
-            LauncherScreen()
+            LauncherScreen(navController = navController)
         }
     }
 }

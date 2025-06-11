@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">Maron OS</string>
+    <string name="about_app">
+        Maron OS is a virtual machine operating experience within an android app developed by
+        Ralph Maron Eda. Just a hobby.
+    </string>
 </resources>
