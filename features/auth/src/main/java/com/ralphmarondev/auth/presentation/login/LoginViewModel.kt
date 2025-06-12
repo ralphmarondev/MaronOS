@@ -2,8 +2,8 @@ package com.ralphmarondev.auth.presentation.login
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ralphmarondev.auth.domain.usecase.LoginUseCase
 import com.ralphmarondev.domain.model.Result
+import com.ralphmarondev.domain.usecase.user.LoginUseCase
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow

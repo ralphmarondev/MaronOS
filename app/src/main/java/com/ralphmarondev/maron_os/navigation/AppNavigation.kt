@@ -23,7 +23,7 @@ fun AppNavigation(
         composable<Routes.Splash> {
             SplashScreen(
                 onSplashDone = {
-                    navController.navigate(Routes.Launcher) {
+                    navController.navigate(Routes.Auth) {
                         popUpTo(0) { inclusive = true }
                         launchSingleTop = true
                     }
