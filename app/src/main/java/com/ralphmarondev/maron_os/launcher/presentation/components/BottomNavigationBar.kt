@@ -43,7 +43,11 @@ fun BottomNavigationBar(
         AppData(
             iconRes = R.drawable.browser,
             name = "Browser",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Browser) {
+                    launchSingleTop = true
+                }
+            }
         ),
         AppData(
             iconRes = R.drawable.clock,
