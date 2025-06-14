@@ -105,7 +105,8 @@ fun HomeScreen() {
                 OutlinedCard(
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 4.dp)
+                        .padding(bottom = 4.dp),
+                    onClick = {}
                 ) {
                     Row(
                         modifier = Modifier
