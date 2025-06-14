@@ -21,6 +21,24 @@ GitHub: [https://github.com/ralphmarondev/MaronOS](https://github.com/ralphmaron
 
 ---
 
+Great! Since your image files are named `first_page.png` and `second_page.png`, here’s the updated
+section you can copy-paste into your `README.md`:
+
+---
+
+## 📸 Screenshots
+
+Here’s a sneak peek of **MaronOS** in action:
+
+<div align="center">
+  <img src="screenshots/first_page.png" alt="MaronOS First Page" width="200" style="max-width: 100%; height: auto; margin: 8px;" />
+  <img src="screenshots/second_page.png" alt="MaronOS Second Page" width="200" style="max-width: 100%; height: auto; margin: 8px;" />
+</div>
+
+> 📌 *Responsive across all screen sizes—optimized for mobile experience.*
+
+---
+
 ## ✨ Features
 
 * 🎨 Themed UI with dark/light mode
