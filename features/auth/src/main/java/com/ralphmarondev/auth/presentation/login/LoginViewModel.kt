@@ -63,6 +63,9 @@ class LoginViewModel(
                 username = _username.value.trim(),
                 password = _password.value.trim()
             )
+            preferences.setUserFullName("")
+            preferences.setUserUsername(_username.value.trim())
+            preferences.setIsFirstLaunch(false)
             _response.value = response
         }
     }
