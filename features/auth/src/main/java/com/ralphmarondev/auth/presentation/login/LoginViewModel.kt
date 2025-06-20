@@ -13,8 +13,6 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 
-private const val DONE: Boolean = true
-
 class LoginViewModel(
     private val loginUseCase: LoginUseCase,
     private val registerUseCase: RegisterUseUseCase,
@@ -42,10 +40,10 @@ class LoginViewModel(
                         password = "os"
                     )
                 )
-                preferences.setupRootUser(value = DONE)
+                preferences.setupRootUser(value = true)
                 preferences.setUserFullName("MaronOS User")
                 preferences.setUserFullName("maron")
-                preferences.setIsFirstLaunch(value = DONE)
+                preferences.setIsFirstLaunch(value = false)
                 println("Creating default user: ${result.message}")
             }
         }
