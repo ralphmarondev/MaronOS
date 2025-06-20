@@ -16,6 +16,7 @@ import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Logout
+import androidx.compose.material.icons.outlined.CloudSync
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.MiscellaneousServices
 import androidx.compose.material.icons.outlined.Notifications
@@ -49,7 +50,7 @@ fun HomeScreen() {
             onClick = {}
         ),
         SettingOption(
-            leadingIcon = Icons.Outlined.MiscellaneousServices,
+            leadingIcon = Icons.Outlined.CloudSync,
             title = "Backup and Sync",
             description = "Data backup and synchronization",
             onClick = {}
