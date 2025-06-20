@@ -18,6 +18,7 @@ class AppPreferences(
         val KEY_DARK_MODE = booleanPreferencesKey("dark_mode")
         val KEY_FIRST_LAUNCH = booleanPreferencesKey("first_launch")
         val KEY_USERNAME = stringPreferencesKey("username")
+        val ROOT_SETUP = booleanPreferencesKey("root_setup")
     }
 
     suspend fun setDarkModeEnabled(enabled: Boolean) {
@@ -46,4 +47,13 @@ class AppPreferences(
 
     val username: Flow<String> = context.appDataStore.data
         .map { prefs -> prefs[KEY_USERNAME] ?: "" }
+
+    suspend fun setupRootUser(value: Boolean) {
+        context.appDataStore.edit { prefs ->
+            prefs[ROOT_SETUP] = value
+        }
+    }
+
+    val isRootUserExists: Flow<Boolean> =
+        context.appDataStore.data.map { prefs -> prefs[ROOT_SETUP] == true }
 }

@@ -5,6 +5,7 @@ import com.ralphmarondev.data.local.preferences.AppPreferences
 import com.ralphmarondev.data.repository.UserRepositoryImpl
 import com.ralphmarondev.domain.repository.UserRepository
 import com.ralphmarondev.domain.usecase.user.LoginUseCase
+import com.ralphmarondev.domain.usecase.user.RegisterUseUseCase
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
@@ -18,4 +19,5 @@ val dataModule = module {
     single { get<AppDatabase>().userDao }
     single<UserRepository> { UserRepositoryImpl(get()) }
     factoryOf(::LoginUseCase)
+    factoryOf(::RegisterUseUseCase)
 }
