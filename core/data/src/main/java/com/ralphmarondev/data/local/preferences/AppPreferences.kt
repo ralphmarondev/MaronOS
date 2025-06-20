@@ -17,8 +17,10 @@ class AppPreferences(
     companion object {
         val KEY_DARK_MODE = booleanPreferencesKey("dark_mode")
         val KEY_FIRST_LAUNCH = booleanPreferencesKey("first_launch")
-        val KEY_USERNAME = stringPreferencesKey("username")
         val ROOT_SETUP = booleanPreferencesKey("root_setup")
+
+        val USER_USERNAME = stringPreferencesKey("user_username")
+        val USER_FULL_NAME = stringPreferencesKey("user_full_name")
     }
 
     suspend fun setDarkModeEnabled(enabled: Boolean) {
@@ -39,15 +41,6 @@ class AppPreferences(
     val isFirstLaunch: Flow<Boolean> = context.appDataStore.data
         .map { prefs -> prefs[KEY_FIRST_LAUNCH] != false }
 
-    suspend fun setUsername(username: String) {
-        context.appDataStore.edit { prefs ->
-            prefs[KEY_USERNAME] = username
-        }
-    }
-
-    val username: Flow<String> = context.appDataStore.data
-        .map { prefs -> prefs[KEY_USERNAME] ?: "" }
-
     suspend fun setupRootUser(value: Boolean) {
         context.appDataStore.edit { prefs ->
             prefs[ROOT_SETUP] = value
@@ -56,4 +49,17 @@ class AppPreferences(
 
     val isRootUserExists: Flow<Boolean> =
         context.appDataStore.data.map { prefs -> prefs[ROOT_SETUP] == true }
+
+
+    suspend fun setUserUsername(username: String) {
+        context.appDataStore.edit { it[USER_USERNAME] = username }
+    }
+
+    val userUsername: Flow<String> = context.appDataStore.data.map { it[USER_USERNAME] ?: "" }
+
+    suspend fun setUserFullName(fullName: String) {
+        context.appDataStore.edit { it[USER_FULL_NAME] = fullName }
+    }
+
+    val userFullName: Flow<String> = context.appDataStore.data.map { it[USER_FULL_NAME] ?: "" }
 }
