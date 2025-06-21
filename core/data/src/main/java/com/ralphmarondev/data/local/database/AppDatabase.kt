@@ -4,12 +4,15 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.ralphmarondev.data.local.database.dao.NoteDao
 import com.ralphmarondev.data.local.database.dao.UserDao
+import com.ralphmarondev.data.local.database.entity.NoteEntity
 import com.ralphmarondev.data.local.database.entity.UserEntity
 
 @Database(
     entities = [
-        UserEntity::class
+        UserEntity::class,
+        NoteEntity::class
     ],
     version = 1,
     exportSchema = false
@@ -17,6 +20,7 @@ import com.ralphmarondev.data.local.database.entity.UserEntity
 abstract class AppDatabase : RoomDatabase() {
 
     abstract val userDao: UserDao
+    abstract val noteDao: NoteDao
 
     companion object {
         private const val NAME = "maron_os_database"

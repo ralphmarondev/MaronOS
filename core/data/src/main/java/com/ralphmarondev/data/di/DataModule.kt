@@ -20,4 +20,7 @@ val dataModule = module {
     single<UserRepository> { UserRepositoryImpl(get()) }
     factoryOf(::LoginUseCase)
     factoryOf(::RegisterUseUseCase)
+
+    // note
+    single { get<AppDatabase>().noteDao }
 }
