@@ -1,6 +1,14 @@
 package com.ralphmarondev.maron_os.navigation
 
+import android.widget.Toast
+import androidx.activity.compose.BackHandler
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.platform.LocalContext
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -12,12 +20,32 @@ import com.ralphmarondev.maron_os.splash.presentation.SplashScreen
 import com.ralphmarondev.notes.NotesNavigation
 import com.ralphmarondev.settings.SettingsNavigation
 import com.ralphmarondev.setup.SetupNavigation
+import kotlinx.coroutines.delay
 
 @Composable
 fun AppNavigation(
     navController: NavHostController = rememberNavController(),
     startDestination: Any
 ) {
+    val context = LocalContext.current
+    var backPressedOnce by remember { mutableStateOf(false) }
+
+    LaunchedEffect(backPressedOnce) {
+        if (backPressedOnce) {
+            delay(2000)
+            backPressedOnce = false
+        }
+    }
+
+    BackHandler(enabled = true) {
+        if (backPressedOnce) {
+            android.os.Process.killProcess(android.os.Process.myPid())
+        } else {
+            backPressedOnce = true
+            Toast.makeText(context, "Press back again to exit.", Toast.LENGTH_SHORT).show()
+        }
+    }
+
     NavHost(
         navController = navController,
         startDestination = startDestination
