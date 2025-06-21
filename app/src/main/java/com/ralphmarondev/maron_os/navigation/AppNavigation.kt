@@ -9,6 +9,7 @@ import com.ralphmarondev.auth.AuthNavigation
 import com.ralphmarondev.browser.BrowserNavigation
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
 import com.ralphmarondev.maron_os.splash.presentation.SplashScreen
+import com.ralphmarondev.notes.NotesNavigation
 import com.ralphmarondev.settings.SettingsNavigation
 import com.ralphmarondev.setup.SetupNavigation
 
@@ -59,6 +60,9 @@ fun AppNavigation(
         }
         composable<Routes.Browser> {
             BrowserNavigation()
+        }
+        composable<Routes.Notes> {
+            NotesNavigation()
         }
     }
 }

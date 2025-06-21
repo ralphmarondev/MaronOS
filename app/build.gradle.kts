@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":features:auth"))
     implementation(project(":features:settings"))
     implementation(project(":features:browser"))
+    implementation(project(":features:notes"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

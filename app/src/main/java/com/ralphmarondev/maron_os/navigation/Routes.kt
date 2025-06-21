@@ -22,4 +22,7 @@ object Routes {
 
     @Serializable
     data object Browser
+
+    @Serializable
+    data object Notes
 }

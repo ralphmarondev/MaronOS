@@ -38,7 +38,11 @@ fun BottomNavigationBar(
         AppData(
             iconRes = R.drawable.notepad,
             name = "Notepad",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Notes) {
+                    launchSingleTop = true
+                }
+            }
         ),
         AppData(
             iconRes = R.drawable.browser,
