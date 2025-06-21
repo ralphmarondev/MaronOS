@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.ralphmarondev.data.local.database.dao.UserDao
-import com.ralphmarondev.data.local.database.entity.User
+import com.ralphmarondev.data.local.database.entity.UserEntity
 
 @Database(
     entities = [
-        User::class
+        UserEntity::class
     ],
     version = 1,
     exportSchema = false

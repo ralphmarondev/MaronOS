@@ -3,8 +3,8 @@ package com.ralphmarondev.data.local.database.entity
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity
-data class User(
+@Entity(tableName = "users")
+data class UserEntity(
     @PrimaryKey(autoGenerate = true)
     val id: Int = 0,
     val fullName: String,
