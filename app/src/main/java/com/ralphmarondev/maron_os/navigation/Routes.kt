@@ -25,4 +25,7 @@ object Routes {
 
     @Serializable
     data object Notes
+
+    @Serializable
+    data object Camera
 }

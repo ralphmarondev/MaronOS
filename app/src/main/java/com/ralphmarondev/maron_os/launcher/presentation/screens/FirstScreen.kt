@@ -20,6 +20,7 @@ import com.ralphmarondev.maron_os.launcher.domain.model.AppData
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherViewModel
 import com.ralphmarondev.maron_os.launcher.presentation.components.AppWithIconAndNameContainer
 import com.ralphmarondev.maron_os.launcher.presentation.components.DateTimeWidget
+import com.ralphmarondev.maron_os.navigation.Routes
 
 @Composable
 fun FirstScreen(
@@ -31,7 +32,11 @@ fun FirstScreen(
         AppData(
             iconRes = R.drawable.camera,
             name = "Camera",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Camera) {
+                    launchSingleTop = true
+                }
+            }
         ),
         AppData(
             iconRes = R.drawable.calendar,
