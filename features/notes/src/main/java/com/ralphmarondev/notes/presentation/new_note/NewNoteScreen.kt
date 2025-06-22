@@ -14,11 +14,15 @@ import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
@@ -32,6 +36,18 @@ fun NewNoteScreen(
     val viewModel: NewNoteViewModel = koinViewModel()
     val title = viewModel.title.collectAsState().value
     val caption = viewModel.caption.collectAsState().value
+    val response = viewModel.response.collectAsState().value
+
+    val snackbar = remember { SnackbarHostState() }
+
+    LaunchedEffect(response) {
+        response?.let {
+            snackbar.showSnackbar(
+                message = response.message
+            )
+            viewModel.resetResponse()
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -52,7 +68,7 @@ fun NewNoteScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = viewModel::create) {
                         Icon(
                             imageVector = Icons.Outlined.Save,
                             contentDescription = "Save note"
@@ -66,6 +82,9 @@ fun NewNoteScreen(
                     actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
+        },
+        snackbarHost = {
+            SnackbarHost(hostState = snackbar)
         }
     ) { innerPadding ->
         LazyColumn(
@@ -87,8 +106,8 @@ fun NewNoteScreen(
                         )
                     },
                     textStyle = TextStyle(
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        fontWeight = MaterialTheme.typography.bodyMedium.fontWeight,
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
                         color = MaterialTheme.colorScheme.secondary
                     ),
                     maxLines = 2
@@ -105,8 +124,8 @@ fun NewNoteScreen(
                         )
                     },
                     textStyle = TextStyle(
-                        fontSize = MaterialTheme.typography.bodyMedium.fontSize,
-                        fontWeight = MaterialTheme.typography.bodyMedium.fontWeight,
+                        fontSize = MaterialTheme.typography.bodyLarge.fontSize,
+                        fontWeight = MaterialTheme.typography.bodyLarge.fontWeight,
                         color = MaterialTheme.colorScheme.secondary
                     ),
                     minLines = 3
