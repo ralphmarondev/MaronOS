@@ -15,6 +15,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.AuthNavigation
 import com.ralphmarondev.browser.BrowserNavigation
+import com.ralphmarondev.calendar.CalendarNavigation
 import com.ralphmarondev.camera.CameraNavigation
 import com.ralphmarondev.gallery.GalleryNavigation
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
@@ -99,6 +100,9 @@ fun AppNavigation(
         }
         composable<Routes.Gallery> {
             GalleryNavigation()
+        }
+        composable<Routes.Calendar>{
+            CalendarNavigation()
         }
     }
 }

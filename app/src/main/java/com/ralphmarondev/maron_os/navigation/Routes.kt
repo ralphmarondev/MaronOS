@@ -31,4 +31,7 @@ object Routes {
 
     @Serializable
     data object Gallery
+
+    @Serializable
+    data object Calendar
 }
