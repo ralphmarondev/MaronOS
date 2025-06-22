@@ -18,7 +18,7 @@ interface NoteDao {
     suspend fun update(note: NoteEntity)
 
     @Query("UPDATE notes SET isDeleted = 1 WHERE id = :id AND isDeleted = 0")
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 
     @Query("SELECT * FROM notes WHERE isDeleted = 0")
     fun getAll(): Flow<List<NoteEntity>>
