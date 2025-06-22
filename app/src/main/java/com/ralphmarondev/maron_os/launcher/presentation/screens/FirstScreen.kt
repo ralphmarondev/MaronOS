@@ -41,7 +41,11 @@ fun FirstScreen(
         AppData(
             iconRes = R.drawable.calendar,
             name = "Calendar",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Calendar) {
+                    launchSingleTop = true
+                }
+            }
         ),
         AppData(
             iconRes = R.drawable.gallery,
