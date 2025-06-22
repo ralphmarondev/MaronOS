@@ -52,10 +52,12 @@ fun NewNoteScreen(
                     }
                 },
                 actions = {
-                    Icon(
-                        imageVector = Icons.Outlined.Save,
-                        contentDescription = "Save note"
-                    )
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.Save,
+                            contentDescription = "Save note"
+                        )
+                    }
                 },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
