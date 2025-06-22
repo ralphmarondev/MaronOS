@@ -46,7 +46,11 @@ fun FirstScreen(
         AppData(
             iconRes = R.drawable.gallery,
             name = "Gallery",
-            onClick = {}
+            onClick = {
+                navController.navigate(Routes.Gallery) {
+                    launchSingleTop = true
+                }
+            }
         )
     )
 

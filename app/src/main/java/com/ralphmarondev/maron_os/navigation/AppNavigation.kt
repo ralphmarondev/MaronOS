@@ -16,6 +16,7 @@ import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.AuthNavigation
 import com.ralphmarondev.browser.BrowserNavigation
 import com.ralphmarondev.camera.CameraNavigation
+import com.ralphmarondev.gallery.GalleryNavigation
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
 import com.ralphmarondev.maron_os.splash.presentation.SplashScreen
 import com.ralphmarondev.notes.NotesNavigation
@@ -95,6 +96,9 @@ fun AppNavigation(
         }
         composable<Routes.Camera> {
             CameraNavigation()
+        }
+        composable<Routes.Gallery> {
+            GalleryNavigation()
         }
     }
 }

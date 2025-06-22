@@ -28,4 +28,7 @@ object Routes {
 
     @Serializable
     data object Camera
+
+    @Serializable
+    data object Gallery
 }
