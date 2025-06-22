@@ -7,4 +7,7 @@ object Routes {
 
     @Serializable
     data object NoteList
+
+    @Serializable
+    data object NewNote
 }
