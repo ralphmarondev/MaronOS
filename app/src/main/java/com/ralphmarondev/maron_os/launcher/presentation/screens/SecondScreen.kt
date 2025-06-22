@@ -42,13 +42,13 @@ fun SecondScreen(
 
     Column(
         modifier = modifier
-            .padding(16.dp)
     ) {
         Text(
             text = stringResource(R.string.about_app),
             color = MaterialTheme.colorScheme.onPrimary,
             fontSize = MaterialTheme.typography.titleMedium.fontSize,
-            fontWeight = MaterialTheme.typography.titleMedium.fontWeight
+            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+            modifier = Modifier.padding(16.dp)
         )
         Spacer(modifier = Modifier.weight(1f))
         LazyVerticalGrid(
@@ -56,7 +56,7 @@ fun SecondScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(vertical = 16.dp),
+                .padding(horizontal = 8.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.End,
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(vertical = 8.dp),

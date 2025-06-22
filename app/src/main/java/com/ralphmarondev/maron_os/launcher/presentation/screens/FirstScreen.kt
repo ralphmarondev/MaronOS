@@ -52,9 +52,11 @@ fun FirstScreen(
 
     Column(
         modifier = modifier
-            .padding(16.dp)
     ) {
-        DateTimeWidget(viewModel = viewModel)
+        DateTimeWidget(
+            viewModel = viewModel,
+            modifier = Modifier.padding(16.dp)
+        )
 
         Spacer(modifier = Modifier.weight(1f))
         LazyVerticalGrid(
@@ -62,7 +64,7 @@ fun FirstScreen(
             modifier = Modifier
                 .fillMaxWidth()
                 .wrapContentHeight()
-                .padding(vertical = 16.dp),
+                .padding(horizontal = 8.dp, vertical = 16.dp),
             horizontalArrangement = Arrangement.Start,
             verticalArrangement = Arrangement.spacedBy(12.dp),
             contentPadding = PaddingValues(vertical = 8.dp),
