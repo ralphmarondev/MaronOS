@@ -28,30 +28,39 @@ class HomeViewModel(
     fun send() {
         viewModelScope.launch {
             try {
-                val chat = generativeModel.startChat(
-                    history = _conversation.value.map {
-                        content(if (it.role == "kate") "model" else it.role) { text(it.message) }
-                    }.toList()
-                )
-
                 _conversation.value += Message(
                     message = _message.value.trim(),
                     role = "user"
                 )
                 _message.value = ""
 
-                val response = chat.sendMessage(_message.value)
+                val placeHolderIndex = _conversation.value.size
                 _conversation.value += Message(
-                    message = response.text.toString(),
+                    message = "Typing...",
                     role = "kate"
                 )
-                Log.d("App", "Response: ${response.text.toString()}")
+
+                val chat = generativeModel.startChat(
+                    history = _conversation.value.dropLast(1).map {
+                        content(if (it.role == "kate") "model" else it.role) { text(it.message) }
+                    }.toList()
+                )
+
+                val response = chat.sendMessage(_message.value.trim())
+                _conversation.value = _conversation.value.toMutableList().apply {
+                    this[placeHolderIndex] = Message(
+                        message = response.text.toString(),
+                        role = "kate"
+                    )
+                }
             } catch (e: Exception) {
-                _conversation.value += Message(
-                    message = "Sorry, I don't understand you.",
-                    role = "kate"
-                )
                 Log.e("App", "Error: ${e.message}")
+                _conversation.value = _conversation.value.toMutableList().apply {
+                    this[this.lastIndex] = Message(
+                        message = "Sorry, I'm too cute to answer you.",
+                        role = "kate"
+                    )
+                }
             }
         }
     }

@@ -1,14 +1,16 @@
 package com.ralphmarondev.bot.presentation.home
 
 import androidx.compose.foundation.layout.PaddingValues
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material3.BottomAppBar
@@ -24,7 +26,9 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.input.ImeAction
 import androidx.compose.ui.unit.dp
 import com.ralphmarondev.bot.presentation.components.MessageCard
 import org.koin.androidx.compose.koinViewModel
@@ -35,6 +39,8 @@ fun HomeScreen() {
     val viewModel: HomeViewModel = koinViewModel()
     val conversation = viewModel.conversation.collectAsState().value
     val message = viewModel.message.collectAsState().value
+
+    val focusManager = LocalFocusManager.current
 
     Scaffold(
         topBar = {
@@ -52,42 +58,52 @@ fun HomeScreen() {
         },
         bottomBar = {
             BottomAppBar {
-                Row(
+                OutlinedTextField(
+                    value = message,
+                    onValueChange = viewModel::onMessageValueChange,
+                    placeholder = {
+                        Text(
+                            text = "Enter message",
+                            style = MaterialTheme.typography.titleMedium,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                    },
+                    trailingIcon = {
+                        IconButton(
+                            onClick = {
+                                viewModel.send()
+                                focusManager.clearFocus()
+                            }
+                        ) {
+                            Icon(
+                                imageVector = Icons.AutoMirrored.Outlined.Send,
+                                contentDescription = "Send",
+                                tint = MaterialTheme.colorScheme.secondary
+                            )
+                        }
+                    },
+                    textStyle = TextStyle(
+                        fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                        fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                        color = MaterialTheme.colorScheme.secondary
+                    ),
                     modifier = Modifier
                         .fillMaxWidth()
-                ) {
-                    OutlinedTextField(
-                        value = message,
-                        onValueChange = viewModel::onMessageValueChange,
-                        placeholder = {
-                            Text(
-                                text = "Enter message",
-                                style = MaterialTheme.typography.titleMedium,
-                                color = MaterialTheme.colorScheme.secondary
-                            )
-                        },
-                        trailingIcon = {
-                            IconButton(onClick = viewModel::send) {
-                                Icon(
-                                    imageVector = Icons.AutoMirrored.Outlined.Send,
-                                    contentDescription = "Send",
-                                    tint = MaterialTheme.colorScheme.secondary
-                                )
-                            }
-                        },
-                        textStyle = TextStyle(
-                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
-                            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
-                            color = MaterialTheme.colorScheme.secondary
-                        ),
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(horizontal = 16.dp)
+                        .padding(horizontal = 16.dp),
+                    singleLine = true,
+                    keyboardOptions = KeyboardOptions(
+                        imeAction = ImeAction.Send
+                    ),
+                    keyboardActions = KeyboardActions(
+                        onSend = {
+                            viewModel.send()
+                            focusManager.clearFocus()
+                        }
                     )
-
-                }
+                )
             }
-        }
+        },
+        contentWindowInsets = WindowInsets(0)
     ) { innerPadding ->
         LazyColumn(
             modifier = Modifier
