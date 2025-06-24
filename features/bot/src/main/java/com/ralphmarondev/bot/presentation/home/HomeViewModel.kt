@@ -10,12 +10,9 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
-class HomeViewModel : ViewModel() {
-
-    val generativeModel = GenerativeModel(
-        modelName = "gemini-2.5-flash",
-        apiKey = ""
-    )
+class HomeViewModel(
+    private val generativeModel: GenerativeModel
+) : ViewModel() {
 
     private val _message = MutableStateFlow("")
     val message = _message.asStateFlow()
@@ -41,6 +38,7 @@ class HomeViewModel : ViewModel() {
                     message = _message.value.trim(),
                     role = "user"
                 )
+                _message.value = ""
 
                 val response = chat.sendMessage(_message.value)
                 _conversation.value += Message(
@@ -55,7 +53,6 @@ class HomeViewModel : ViewModel() {
                 )
                 Log.e("App", "Error: ${e.message}")
             }
-            _message.value = ""
         }
     }
 }
