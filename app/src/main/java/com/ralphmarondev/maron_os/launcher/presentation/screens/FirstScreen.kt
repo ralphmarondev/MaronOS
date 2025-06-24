@@ -95,6 +95,6 @@ fun FirstScreen(
                 )
             }
         }
-        Spacer(modifier = Modifier.height(80.dp))
+        Spacer(modifier = Modifier.height(90.dp))
     }
 }
