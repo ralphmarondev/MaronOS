@@ -2,10 +2,13 @@ package com.ralphmarondev.bot.presentation.home
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.outlined.Send
 import androidx.compose.material3.BottomAppBar
@@ -29,6 +32,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun HomeScreen() {
     val viewModel: HomeViewModel = koinViewModel()
+    val conversation = viewModel.conversation.collectAsState().value
     val message = viewModel.message.collectAsState().value
 
     Scaffold(
@@ -90,7 +94,10 @@ fun HomeScreen() {
                 .padding(innerPadding),
             contentPadding = PaddingValues(16.dp)
         ) {
-
+            items(conversation) {
+                Text(text = "${it.role}: ${it.message}")
+            }
+            item { Spacer(modifier = Modifier.height(200.dp)) }
         }
     }
 }

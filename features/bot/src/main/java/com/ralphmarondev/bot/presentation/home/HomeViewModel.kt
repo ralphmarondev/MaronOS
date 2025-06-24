@@ -1,9 +1,9 @@
 package com.ralphmarondev.bot.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
+import com.ralphmarondev.bot.domain.model.Message
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
@@ -18,6 +18,9 @@ class HomeViewModel : ViewModel() {
     private val _message = MutableStateFlow("")
     val message = _message.asStateFlow()
 
+    private val _conversation = MutableStateFlow<List<Message>>(emptyList())
+    val conversation = _conversation.asStateFlow()
+
 
     fun onMessageValueChange(value: String) {
         _message.value = value
@@ -26,8 +29,17 @@ class HomeViewModel : ViewModel() {
     fun send() {
         viewModelScope.launch {
             val chat = generativeModel.startChat()
+
+            _conversation.value += Message(
+                message = _message.value.trim(),
+                role = "user"
+            )
+
             val response = chat.sendMessage(_message.value)
-            Log.d("App", "Response from gemini: ${response.text.toString()}")
+            _conversation.value += Message(
+                message = response.text.toString(),
+                role = "kate"
+            )
         }
     }
 }
