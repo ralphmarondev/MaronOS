@@ -55,6 +55,15 @@ fun FirstScreen(
                     launchSingleTop = true
                 }
             }
+        ),
+        AppData(
+            iconRes = R.drawable.bot,
+            name = "Kate",
+            onClick = {
+                navController.navigate(Routes.Bot) {
+                    launchSingleTop = true
+                }
+            }
         )
     )
 

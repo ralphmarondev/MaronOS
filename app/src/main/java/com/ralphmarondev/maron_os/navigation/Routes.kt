@@ -34,4 +34,7 @@ object Routes {
 
     @Serializable
     data object Calendar
+
+    @Serializable
+    data object Bot
 }

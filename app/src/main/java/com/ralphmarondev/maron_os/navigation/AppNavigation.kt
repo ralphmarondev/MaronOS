@@ -14,6 +14,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.ralphmarondev.auth.AuthNavigation
+import com.ralphmarondev.bot.BotNavigation
 import com.ralphmarondev.browser.BrowserNavigation
 import com.ralphmarondev.calendar.CalendarNavigation
 import com.ralphmarondev.camera.CameraNavigation
@@ -101,8 +102,11 @@ fun AppNavigation(
         composable<Routes.Gallery> {
             GalleryNavigation()
         }
-        composable<Routes.Calendar>{
+        composable<Routes.Calendar> {
             CalendarNavigation()
+        }
+        composable<Routes.Bot> {
+            BotNavigation()
         }
     }
 }
