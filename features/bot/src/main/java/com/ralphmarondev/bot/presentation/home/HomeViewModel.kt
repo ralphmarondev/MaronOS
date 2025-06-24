@@ -1,5 +1,6 @@
 package com.ralphmarondev.bot.presentation.home
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
@@ -40,6 +41,7 @@ class HomeViewModel : ViewModel() {
                 message = response.text.toString(),
                 role = "kate"
             )
+            Log.d("App", "Response: ${response.text.toString()}")
         }
     }
 }

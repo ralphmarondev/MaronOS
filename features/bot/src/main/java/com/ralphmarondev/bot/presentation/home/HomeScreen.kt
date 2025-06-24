@@ -26,6 +26,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
+import com.ralphmarondev.bot.presentation.components.MessageCard
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -92,12 +93,13 @@ fun HomeScreen() {
             modifier = Modifier
                 .fillMaxSize()
                 .padding(innerPadding),
-            contentPadding = PaddingValues(16.dp)
+            contentPadding = PaddingValues(16.dp),
+            reverseLayout = true
         ) {
-            items(conversation) {
-                Text(text = "${it.role}: ${it.message}")
+            items(conversation.reversed()) {
+                MessageCard(it)
             }
-            item { Spacer(modifier = Modifier.height(200.dp)) }
+            item { Spacer(modifier = Modifier.height(100.dp)) }
         }
     }
 }
