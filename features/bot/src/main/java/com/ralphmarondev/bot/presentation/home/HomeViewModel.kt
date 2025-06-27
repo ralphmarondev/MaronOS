@@ -6,12 +6,14 @@ import androidx.lifecycle.viewModelScope
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.content
 import com.ralphmarondev.bot.domain.model.Message
+import com.ralphmarondev.bot.domain.usecase.CreateMessageUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class HomeViewModel(
-    private val generativeModel: GenerativeModel
+    private val generativeModel: GenerativeModel,
+    private val createMessageUseCase: CreateMessageUseCase
 ) : ViewModel() {
 
     private val _message = MutableStateFlow("")
