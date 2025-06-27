@@ -17,7 +17,7 @@ class UserRepositoryImpl(
         dao.update(user.toEntity())
     }
 
-    override suspend fun delete(id: Int) {
+    override suspend fun delete(id: Long) {
         dao.delete(id)
     }
 

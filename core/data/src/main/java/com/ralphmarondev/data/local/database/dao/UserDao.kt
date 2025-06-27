@@ -17,7 +17,7 @@ interface UserDao {
     suspend fun update(user: UserEntity)
 
     @Query("UPDATE users SET isDeleted = 1 WHERE id = :id")
-    suspend fun delete(id: Int)
+    suspend fun delete(id: Long)
 
     @Query("SELECT * FROM users WHERE username = :username AND isDeleted = 0 LIMIT 1")
     suspend fun getDetailByUsername(username: String): UserEntity?
