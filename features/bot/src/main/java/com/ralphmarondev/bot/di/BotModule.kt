@@ -5,6 +5,7 @@ import com.ralphmarondev.bot.BuildConfig
 import com.ralphmarondev.bot.data.repository.BotRepositoryImpl
 import com.ralphmarondev.bot.domain.repository.BotRepository
 import com.ralphmarondev.bot.domain.usecase.CreateMessageUseCase
+import com.ralphmarondev.bot.domain.usecase.GenerateResponseUseCase
 import com.ralphmarondev.bot.domain.usecase.GetAllMessageUseCase
 import com.ralphmarondev.bot.presentation.home.HomeViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
@@ -27,6 +28,7 @@ val botModule = module {
 
     factoryOf(::CreateMessageUseCase)
     factoryOf(::GetAllMessageUseCase)
+    factoryOf(::GenerateResponseUseCase)
 
     viewModelOf(::HomeViewModel)
 }
