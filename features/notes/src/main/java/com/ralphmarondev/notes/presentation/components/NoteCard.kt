@@ -11,6 +11,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.ralphmarondev.notes.domain.model.Note
+import com.ralphmarondev.notes.util.formatTimestamp
 
 @Composable
 fun NoteCard(
@@ -36,7 +37,7 @@ fun NoteCard(
                 overflow = TextOverflow.Ellipsis
             )
             Text(
-                text = "${note.lastModified}",
+                text = formatTimestamp(note.lastModified),
                 fontSize = MaterialTheme.typography.labelMedium.fontSize,
                 fontWeight = MaterialTheme.typography.labelMedium.fontWeight,
                 color = MaterialTheme.colorScheme.tertiary,
