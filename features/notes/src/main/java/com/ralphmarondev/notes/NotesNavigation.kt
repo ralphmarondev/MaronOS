@@ -4,7 +4,9 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.ralphmarondev.notes.presentation.new_note.NewNoteScreen
+import com.ralphmarondev.notes.presentation.note_details.NoteDetailsScreen
 import com.ralphmarondev.notes.presentation.note_list.NoteListScreen
 
 @Composable
@@ -21,6 +23,11 @@ fun NotesNavigation() {
                     navController.navigate(Routes.NewNote) {
                         launchSingleTop = true
                     }
+                },
+                navigateToNoteDetails = { noteId ->
+                    navController.navigate(Routes.NoteDetails(noteId)) {
+                        launchSingleTop = true
+                    }
                 }
             )
         }
@@ -29,6 +36,15 @@ fun NotesNavigation() {
                 navigateBack = {
                     navController.navigateUp()
                 }
+            )
+        }
+        composable<Routes.NoteDetails> {
+            val id = it.toRoute<Routes.NoteDetails>().id
+            NoteDetailsScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                noteId = id
             )
         }
     }

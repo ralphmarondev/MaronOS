@@ -8,6 +8,7 @@ import com.ralphmarondev.notes.domain.usecase.GetAllNotesUseCase
 import com.ralphmarondev.notes.domain.usecase.GetNoteByIdUseCase
 import com.ralphmarondev.notes.domain.usecase.UpdateNoteUseCase
 import com.ralphmarondev.notes.presentation.new_note.NewNoteViewModel
+import com.ralphmarondev.notes.presentation.note_details.NoteDetailsViewModel
 import com.ralphmarondev.notes.presentation.note_list.NoteListViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.factoryOf
@@ -26,4 +27,5 @@ val noteModule = module {
 
     viewModelOf(::NoteListViewModel)
     viewModelOf(::NewNoteViewModel)
+    viewModelOf(::NoteDetailsViewModel)
 }

@@ -30,7 +30,8 @@ import org.koin.androidx.compose.koinViewModel
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun NoteListScreen(
-    navigateToNewNote: () -> Unit
+    navigateToNewNote: () -> Unit,
+    navigateToNoteDetails: (Long) -> Unit
 ) {
     val viewModel: NoteListViewModel = koinViewModel()
     val notes = viewModel.notes.collectAsState().value
@@ -72,7 +73,7 @@ fun NoteListScreen(
             ) { note ->
                 NoteCard(
                     note = note,
-                    onClick = {},
+                    onClick = { navigateToNoteDetails(note.id) },
                     modifier = Modifier
                         .fillMaxWidth()
                         .padding(bottom = 8.dp)
