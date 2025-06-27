@@ -23,4 +23,7 @@ val dataModule = module {
 
     // note
     single { get<AppDatabase>().noteDao }
+
+    // bot
+    single { get<AppDatabase>().botMessageDao }
 }
