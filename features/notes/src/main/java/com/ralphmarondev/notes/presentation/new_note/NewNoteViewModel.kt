@@ -41,8 +41,13 @@ class NewNoteViewModel(
                 title = _title.value.trim(),
                 caption = _caption.value.trim()
             )
-            val result = createNoteUseCase(note)
+            val result: Result = createNoteUseCase(note)
             _response.value = result
+
+            if (result.success) {
+                _title.value = ""
+                _caption.value = ""
+            }
         }
     }
 }
