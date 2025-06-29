@@ -22,6 +22,7 @@ import com.ralphmarondev.gallery.GalleryNavigation
 import com.ralphmarondev.maron_os.launcher.presentation.LauncherScreen
 import com.ralphmarondev.maron_os.splash.presentation.SplashScreen
 import com.ralphmarondev.notes.NotesNavigation
+import com.ralphmarondev.quri.QuriNavigation
 import com.ralphmarondev.settings.SettingsNavigation
 import com.ralphmarondev.setup.SetupNavigation
 import kotlinx.coroutines.delay
@@ -107,6 +108,9 @@ fun AppNavigation(
         }
         composable<Routes.Bot> {
             BotNavigation()
+        }
+        composable<Routes.Quri> {
+            QuriNavigation()
         }
     }
 }

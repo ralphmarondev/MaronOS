@@ -37,4 +37,7 @@ object Routes {
 
     @Serializable
     data object Bot
+
+    @Serializable
+    data object Quri
 }

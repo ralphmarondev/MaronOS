@@ -21,6 +21,7 @@ import androidx.navigation.NavHostController
 import com.ralphmarondev.maron_os.R
 import com.ralphmarondev.maron_os.launcher.domain.model.AppData
 import com.ralphmarondev.maron_os.launcher.presentation.components.AppWithIconAndNameContainer
+import com.ralphmarondev.maron_os.navigation.Routes
 
 @Composable
 fun SecondScreen(
@@ -37,6 +38,15 @@ fun SecondScreen(
             iconRes = R.drawable.calculator,
             name = "Calculator",
             onClick = {}
+        ),
+        AppData(
+            iconRes = R.drawable.quri,
+            name = "Quri",
+            onClick = {
+                navController.navigate(Routes.Quri) {
+                    launchSingleTop = true
+                }
+            }
         )
     )
 
