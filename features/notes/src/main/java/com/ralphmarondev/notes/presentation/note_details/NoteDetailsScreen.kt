@@ -24,6 +24,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import com.ralphmarondev.notes.presentation.components.DeleteNoteDialog
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -35,6 +36,7 @@ fun NoteDetailsScreen(
 ) {
     val viewModel: NoteDetailsViewModel = koinViewModel(parameters = { parametersOf(noteId) })
     val note = viewModel.note.collectAsState().value
+    val showDeleteNoteDialog = viewModel.showDeleteNoteDialog.collectAsState().value
 
     Scaffold(
         topBar = {
@@ -57,7 +59,11 @@ fun NoteDetailsScreen(
                             contentDescription = "Edit note"
                         )
                     }
-                    IconButton(onClick = {}) {
+                    IconButton(
+                        onClick = {
+                            viewModel.showDeleteNoteDialogChange(value = true)
+                        }
+                    ) {
                         Icon(
                             imageVector = Icons.Outlined.Delete,
                             contentDescription = "Delete note"
@@ -120,5 +126,21 @@ fun NoteDetailsScreen(
                 }
             }
         }
+    }
+
+    if (showDeleteNoteDialog) {
+        DeleteNoteDialog(
+            onDismiss = {
+                viewModel.showDeleteNoteDialogChange(value = false)
+            },
+            onConfirm = {
+                viewModel.showDeleteNoteDialogChange(
+                    value = false,
+                    action = {
+                        navigateBack()
+                    }
+                )
+            }
+        )
     }
 }

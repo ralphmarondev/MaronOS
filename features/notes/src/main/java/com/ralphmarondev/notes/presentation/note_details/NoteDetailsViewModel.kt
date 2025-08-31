@@ -1,5 +1,6 @@
 package com.ralphmarondev.notes.presentation.note_details
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.notes.domain.model.Note
@@ -16,11 +17,28 @@ class NoteDetailsViewModel(
     private val _note = MutableStateFlow<Note?>(null)
     val note = _note.asStateFlow()
 
+    private val _showDeleteNoteDialog = MutableStateFlow(false)
+    val showDeleteNoteDialog = _showDeleteNoteDialog.asStateFlow()
+
 
     init {
         viewModelScope.launch {
             val note = getNoteByIdUseCase(noteId)
             _note.value = note
         }
+    }
+
+    fun showDeleteNoteDialogChange(
+        value: Boolean,
+        action: () -> Unit = {}
+    ) {
+        _showDeleteNoteDialog.value = value
+        if (value) {
+            viewModelScope.launch {
+                Log.d("App", "Deleting note...")
+            }
+        }
+        Log.d("App", "Doing the action")
+        action()
     }
 }
