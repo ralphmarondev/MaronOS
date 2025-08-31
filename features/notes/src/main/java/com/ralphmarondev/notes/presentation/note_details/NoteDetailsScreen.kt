@@ -1,14 +1,21 @@
 package com.ralphmarondev.notes.presentation.note_details
 
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.ArrowBackIosNew
+import androidx.compose.material.icons.outlined.Delete
+import androidx.compose.material.icons.outlined.EditNote
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
@@ -16,6 +23,7 @@ import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import org.koin.androidx.compose.koinViewModel
 import org.koin.core.parameter.parametersOf
 
@@ -42,10 +50,25 @@ fun NoteDetailsScreen(
                         )
                     }
                 },
+                actions = {
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.EditNote,
+                            contentDescription = "Edit note"
+                        )
+                    }
+                    IconButton(onClick = {}) {
+                        Icon(
+                            imageVector = Icons.Outlined.Delete,
+                            contentDescription = "Delete note"
+                        )
+                    }
+                },
                 colors = TopAppBarDefaults.topAppBarColors(
                     containerColor = MaterialTheme.colorScheme.primary,
                     titleContentColor = MaterialTheme.colorScheme.onPrimary,
-                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
+                    navigationIconContentColor = MaterialTheme.colorScheme.onPrimary,
+                    actionIconContentColor = MaterialTheme.colorScheme.onPrimary
                 )
             )
         }
@@ -53,11 +76,48 @@ fun NoteDetailsScreen(
         LazyColumn(
             modifier = Modifier
                 .fillMaxSize()
-                .padding(innerPadding)
+                .padding(innerPadding),
+            contentPadding = PaddingValues(16.dp)
         ) {
             item {
-                Text(text = "Title: ${note?.title}")
-                Text(text = "Caption: ${note?.caption}")
+                OutlinedCard(
+                    modifier = Modifier.padding(bottom = 8.dp)
+                ) {
+                    Column(
+                        modifier = Modifier
+                            .fillMaxWidth()
+                            .padding(16.dp)
+                    ) {
+                        Text(
+                            text = "Title",
+                            fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                            fontWeight = MaterialTheme.typography.labelMedium.fontWeight,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                        Text(
+                            text = "${note?.title}",
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                            color = MaterialTheme.colorScheme.primary
+                        )
+
+                        HorizontalDivider(modifier = Modifier.padding(vertical = 8.dp))
+
+                        Text(
+                            text = "Caption",
+                            fontSize = MaterialTheme.typography.labelMedium.fontSize,
+                            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                            color = MaterialTheme.colorScheme.secondary
+                        )
+                        Text(
+                            text = "${note?.caption}",
+                            fontSize = MaterialTheme.typography.titleMedium.fontSize,
+                            fontWeight = MaterialTheme.typography.titleMedium.fontWeight,
+                            color = MaterialTheme.colorScheme.primary,
+                            minLines = 2
+                        )
+                    }
+                }
             }
         }
     }
