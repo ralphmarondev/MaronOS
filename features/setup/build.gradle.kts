@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.ralphmarondev.setup"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 28

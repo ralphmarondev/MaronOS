@@ -7,11 +7,12 @@ plugins {
 
 android {
     namespace = "com.ralphmarondev.maron_os"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         applicationId = "com.ralphmarondev.maron_os"
         minSdk = 28
+        //noinspection OldTargetApi
         targetSdk = 35
         versionCode = 1
         versionName = "1.0"

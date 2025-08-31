@@ -7,7 +7,7 @@ plugins {
 
 android {
     namespace = "com.ralphmarondev.gallery"
-    compileSdk = 35
+    compileSdk = 36
 
     defaultConfig {
         minSdk = 28
