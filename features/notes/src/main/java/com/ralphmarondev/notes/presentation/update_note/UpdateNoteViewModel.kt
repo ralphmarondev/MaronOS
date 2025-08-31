@@ -1,17 +1,18 @@
 package com.ralphmarondev.notes.presentation.update_note
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.ralphmarondev.notes.domain.model.Note
 import com.ralphmarondev.notes.domain.usecase.GetNoteByIdUseCase
+import com.ralphmarondev.notes.domain.usecase.UpdateNoteUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 
 class UpdateNoteViewModel(
     private val noteId: Long,
-    private val getNoteByIdUseCase: GetNoteByIdUseCase
+    private val getNoteByIdUseCase: GetNoteByIdUseCase,
+    private val updateNoteUseCase: UpdateNoteUseCase
 ) : ViewModel() {
 
     private val _note = MutableStateFlow<Note?>(null)
@@ -78,6 +79,14 @@ class UpdateNoteViewModel(
         _oldTitle.value = _title.value
         _oldCaption.value = _caption.value
 
-        Log.d("App", "Updating database.")
+        viewModelScope.launch {
+            val note = _note.value?.copy(
+                title = _title.value.trim(),
+                caption = _caption.value.trim()
+            )
+            note?.let {
+                updateNoteUseCase(note = note)
+            }
+        }
     }
 }
