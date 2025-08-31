@@ -13,4 +13,7 @@ object Routes {
 
     @Serializable
     data class NoteDetails(val id: Long)
+
+    @Serializable
+    data class UpdateNote(val id: Long)
 }

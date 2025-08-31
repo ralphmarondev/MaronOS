@@ -32,6 +32,7 @@ import org.koin.core.parameter.parametersOf
 @Composable
 fun NoteDetailsScreen(
     navigateBack: () -> Unit,
+    navigateToUpdate: (Long) -> Unit,
     noteId: Long
 ) {
     val viewModel: NoteDetailsViewModel = koinViewModel(parameters = { parametersOf(noteId) })
@@ -53,7 +54,7 @@ fun NoteDetailsScreen(
                     }
                 },
                 actions = {
-                    IconButton(onClick = {}) {
+                    IconButton(onClick = { navigateToUpdate(noteId) }) {
                         Icon(
                             imageVector = Icons.Outlined.EditNote,
                             contentDescription = "Edit note"

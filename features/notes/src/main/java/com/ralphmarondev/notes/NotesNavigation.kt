@@ -8,6 +8,7 @@ import androidx.navigation.toRoute
 import com.ralphmarondev.notes.presentation.new_note.NewNoteScreen
 import com.ralphmarondev.notes.presentation.note_details.NoteDetailsScreen
 import com.ralphmarondev.notes.presentation.note_list.NoteListScreen
+import com.ralphmarondev.notes.presentation.update_note.UpdateNoteScreen
 
 @Composable
 fun NotesNavigation() {
@@ -41,6 +42,18 @@ fun NotesNavigation() {
         composable<Routes.NoteDetails> {
             val id = it.toRoute<Routes.NoteDetails>().id
             NoteDetailsScreen(
+                navigateBack = {
+                    navController.navigateUp()
+                },
+                navigateToUpdate = {
+                    navController.navigate(Routes.UpdateNote(id))
+                },
+                noteId = id
+            )
+        }
+        composable<Routes.UpdateNote> {
+            val id = it.toRoute<Routes.UpdateNote>().id
+            UpdateNoteScreen(
                 navigateBack = {
                     navController.navigateUp()
                 },
