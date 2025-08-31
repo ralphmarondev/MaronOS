@@ -105,7 +105,7 @@ fun NewNoteScreen(
                     onValueChange = viewModel::onTitleValueChange,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(vertical = 4.dp),
+                        .padding(bottom = 4.dp),
                     label = {
                         Text(
                             text = "Enter title"
