@@ -10,9 +10,9 @@ import com.ralphmarondev.notes.domain.usecase.UpdateNoteUseCase
 import com.ralphmarondev.notes.presentation.new_note.NewNoteViewModel
 import com.ralphmarondev.notes.presentation.note_details.NoteDetailsViewModel
 import com.ralphmarondev.notes.presentation.note_list.NoteListViewModel
-import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.factoryOf
 import org.koin.core.module.dsl.singleOf
+import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.bind
 import org.koin.dsl.module
 
